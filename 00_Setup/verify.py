@@ -2,8 +2,11 @@ import sys
 import shutil
 import subprocess
 
+
+# This file checks whether the setup environment is correct. It checks for Python version, NumPy, Matplotlib, Jupyter, Git, Node.js, and Rust (cargo). It also checks for PyTorch and CUDA if available.
 CHECKS = [
-    ("Python 3.10+", lambda: sys.version_info >= (3, 10), f"Python {sys.version}"),
+    ("Python 3.10+", lambda: sys.version_info >=
+     (3, 10), f"Python {sys.version}"),
     ("NumPy", lambda: __import__("numpy"), None),
     ("Matplotlib", lambda: __import__("matplotlib"), None),
     ("Jupyter", lambda: __import__("jupyter"), None),
@@ -17,7 +20,8 @@ GPU_CHECKS = [
     (
         "CUDA",
         lambda: __import__("torch").cuda.is_available(),
-        lambda: __import__("torch").cuda.get_device_name(0) if __import__("torch").cuda.is_available() else "Not available",
+        lambda: __import__("torch").cuda.get_device_name(0) if __import__(
+            "torch").cuda.is_available() else "Not available",
     ),
 ]
 
@@ -48,7 +52,8 @@ def main():
     total = len(CHECKS)
 
     print("\nGPU (optional):")
-    gpu_passed = sum(run_check(name, fn, detail) for name, fn, detail in GPU_CHECKS)
+    gpu_passed = sum(run_check(name, fn, detail)
+                     for name, fn, detail in GPU_CHECKS)
     gpu_total = len(GPU_CHECKS)
 
     print(f"\nResult: {passed}/{total} core checks passed", end="")
