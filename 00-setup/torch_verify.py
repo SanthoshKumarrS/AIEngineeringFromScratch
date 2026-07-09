@@ -1,5 +1,6 @@
 import torch
 
+# Verify that PyTorch is installed correctly and can access the GPU
 print(f"CUDA available: {torch.cuda.is_available()}")
 print(f"CUDA version: {torch.version.cuda}")
 if torch.cuda.is_available():
